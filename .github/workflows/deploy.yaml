@@ -1,4 +1,4 @@
-name: Deploy Yokun frontend # Nomi o'zgartirilgan
+name: Deploy Yokun frontend
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Yokun frontend # Job nomi o'zgartirilgan
+    name: Deploy Yokun frontend
     runs-on: ubuntu-22.04
 
     steps:
@@ -23,7 +23,11 @@ jobs:
 
       - name: Install and Build
         run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+          
           npm install
+          
           npm run build
 
       - name: Deploy files to server
