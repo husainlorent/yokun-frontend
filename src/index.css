@@ -1,0 +1,61 @@
+@import 'tailwindcss';
+
+@theme {
+    --color-white: #fff;
+    --color-black: #000;
+    --color-hero-bg: rgb(244, 250, 255);
+    --color-border-grey: #0000001a;
+    --color-midnight: #121063;
+    --color-tahiti: #3ab7bf;
+    --color-bermuda: #78dcca;
+
+    --font-logo: 'Caveat', cursive;
+    --font-poppins: Poppins, sans-serif;
+    --font-script: 'Great Vibes', cursive;
+    --leading-heading-h1: 130%;
+}
+
+@layer components {
+    .logo {
+        @apply text-midnight font-logo text-3xl font-extrabold transition-colors duration-200 hover:text-black;
+    }
+
+    .search {
+        @apply max-w-lg min-w-md rounded-full border border-gray-400 px-4 py-1.5 outline-none;
+    }
+    .nav-link-slot {
+        @apply hover:text-midnight p-1 font-medium transition-all duration-300;
+        transform-style: preserve-3d;
+    }
+
+    .social-item {
+        @apply rounded border border-gray-500 p-1.5 text-gray-200 transition-colors duration-200 hover:border-gray-200;
+    }
+}
+
+@layer utilities {
+    h1 {
+        @apply leading-heading-h1 text-4xl font-semibold text-black;
+    }
+}
+
+body {
+    @apply font-poppins;
+}
+
+/* caroueslel  start */
+
+.embla {
+    overflow: hidden;
+}
+
+.embla__container {
+    display: flex;
+}
+
+.embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+}
+
+/* caroueslel  end */

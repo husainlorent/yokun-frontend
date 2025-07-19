@@ -1,0 +1,986 @@
+# Professional News Website - Complete Architecture Guide
+
+## 🎯 Loyiha Haqida
+
+Bu professional news website real production environment uchun mo'ljallangan. Barcha zamonaviy teknologiyalar va best practice'lar qo'llanilgan. 
+
+### Loyihaning Maqsadi
+- Yangiliklar saytini professional darajada yaratish
+- Scalable va maintainable kod yozish
+- Optimal performance ta'minlash
+- SEO va accessibility standartlariga javob berish
+
+---
+
+## 🔧 Technology Stack - Har Birining Vazifasi
+
+### **Frontend Core**
+
+#### **React 18** - UI Library
+```bash
+npm install react@18 react-dom@18
+```
+**Nima uchun kerak:**
+- Virtual DOM orqali fast rendering
+- Component-based architecture
+- Reusable UI components
+- Large community support
+
+**Qanday ishlaydi:**
+- Componentlar orqali UI quriladi
+- State changes avtomatik UI ni update qiladi
+- Hooks orqali functional components kuchli bo'ladi
+
+#### **TypeScript** - Type Safety
+```bash
+npm install typescript @types/react @types/react-dom
+```
+**Nima uchun kerak:**
+- Compile-time error detection
+- Better IDE support (autocomplete, refactoring)
+- Code documentation va maintainability
+- Large codebase uchun zarur
+
+**Qanday ishlaydi:**
+```typescript
+// Bu runtime error bo'lishi mumkin
+const user = { name: "John" }
+console.log(user.age) // undefined
+
+// TypeScript bilan compile time error
+interface User {
+  name: string
+  age?: number
+}
+const user: User = { name: "John" }
+console.log(user.age) // TypeScript warning beradi
+```
+
+#### **Vite** - Build Tool
+```bash
+npm create vite@latest news-website -- --template react-ts
+```
+**Nima uchun kerak:**
+- Lightning fast development server
+- Hot Module Replacement (HMR)
+- Optimized production builds
+- Modern ES modules support
+
+**Qanday ishlaydi:**
+- Development: ES modules natively serve qiladi
+- Production: Rollup bilan optimize qiladi
+- Webpack dan 10-100x tezroq
+
+### **State Management**
+
+#### **TanStack Query (React Query)** - Server State
+```bash
+npm install @tanstack/react-query @tanstack/react-query-devtools
+```
+**Nima uchun kerak:**
+- Server state (API data) ni boshqarish
+- Automatic caching va background refetching
+- Loading/error states avtomatik
+- Optimistic updates
+
+**Qanday ishlaydi:**
+```typescript
+// Oddiy fetch approach
+const [news, setNews] = useState([])
+const [loading, setLoading] = useState(false)
+const [error, setError] = useState(null)
+
+useEffect(() => {
+  const fetchNews = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch('/api/news')
+      const data = await response.json()
+      setNews(data)
+    } catch (err) {
+      setError(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+  fetchNews()
+}, [])
+
+// React Query bilan
+const { data: news, isLoading, error } = useQuery({
+  queryKey: ['news'],
+  queryFn: () => fetch('/api/news').then(res => res.json()),
+  staleTime: 5 * 60 * 1000, // 5 minut cache
+})
+```
+
+#### **Zustand** - Client State
+```bash
+npm install zustand
+```
+**Nima uchun kerak:**
+- UI state (theme, modals, sidebar) uchun
+- Redux dan soddaroq
+- Boilerplate kod kam
+
+**Qanday ishlaydi:**
+```typescript
+// Global state yaratish
+const useUIStore = create((set) => ({
+  theme: 'light',
+  sidebarOpen: false,
+  toggleTheme: () => set((state) => ({ 
+    theme: state.theme === 'light' ? 'dark' : 'light' 
+  })),
+  toggleSidebar: () => set((state) => ({ 
+    sidebarOpen: !state.sidebarOpen 
+  })),
+}))
+
+// Component da ishlatish
+const { theme, toggleTheme } = useUIStore()
+```
+
+### **Form Handling**
+
+#### **React Hook Form** - Form Management
+```bash
+npm install react-hook-form @hookform/resolvers
+```
+**Nima uchun kerak:**
+- Minimal re-renders
+- Built-in validation
+- Better performance
+- Easy integration with validation libraries
+
+#### **Zod** - Schema Validation
+```bash
+npm install zod
+```
+**Nima uchun kerak:**
+- Runtime type checking
+- Schema-based validation
+- TypeScript integration
+- API response validation
+
+**Qanday ishlaydi:**
+```typescript
+// Schema yaratish
+const contactSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email'),
+  message: z.string().min(10, 'Message too short'),
+})
+
+// Form da ishlatish
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(contactSchema)
+})
+```
+
+### **Styling**
+
+#### **Tailwind CSS** - Utility-First CSS
+```bash
+npm install tailwindcss postcss autoprefixer
+```
+**Nima uchun kerak:**
+- Rapid development
+- Consistent design system
+- Purged CSS (kichik bundle size)
+- Responsive design oson
+
+**Qanday ishlaydi:**
+```jsx
+// Oddiy CSS
+<div className="custom-card">
+  <h3 className="card-title">Title</h3>
+</div>
+
+// CSS file
+.custom-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+// Tailwind bilan
+<div className="bg-white rounded-lg p-4 shadow-md">
+  <h3 className="text-lg font-semibold">Title</h3>
+</div>
+```
+
+#### **Framer Motion** - Animation
+```bash
+npm install framer-motion
+```
+**Nima uchun kerak:**
+- Smooth animations
+- Gesture handling
+- Layout animations
+- Better UX
+
+### **HTTP Client**
+
+#### **Axios** - API Calls
+```bash
+npm install axios
+```
+**Nima uchun kerak:**
+- Request/response interceptors
+- Automatic JSON handling
+- Request/response transformation
+- Better error handling
+
+**Qanday ishlaydi:**
+```typescript
+// Axios instance yaratish
+const api = axios.create({
+  baseURL: 'https://api.example.com',
+  timeout: 10000,
+})
+
+// Request interceptor
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
+// Response interceptor
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Redirect to login
+    }
+    return Promise.reject(error)
+  }
+)
+```
+
+---
+
+## 📁 Project Structure - Har Bir Folder Nima Uchun
+
+```
+src/
+├── components/           # UI Componentlar
+│   ├── ui/              # Basic components (Button, Input)
+│   ├── layout/          # Layout components (Header, Footer)
+│   ├── news/            # News-specific components
+│   ├── forms/           # Form components
+│   └── common/          # Common components (Loader, ErrorBoundary)
+├── pages/               # Page components (Route components)
+├── hooks/               # Custom hooks (reusable logic)
+├── services/            # API services va external services
+├── store/               # Global state management
+├── types/               # TypeScript type definitions
+├── utils/               # Utility functions
+├── styles/              # Global styles
+├── assets/              # Static files
+└── App.tsx              # Main app component
+```
+
+### **Components Structure**
+
+#### **UI Components**
+```typescript
+// components/ui/Button.tsx
+interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'outline'
+  size?: 'sm' | 'md' | 'lg'
+  children: React.ReactNode
+  onClick?: () => void
+}
+
+export const Button = ({ variant = 'primary', size = 'md', children, onClick }: ButtonProps) => {
+  const baseClasses = 'font-medium rounded-lg transition-colors'
+  const variants = {
+    primary: 'bg-blue-600 text-white hover:bg-blue-700',
+    secondary: 'bg-gray-600 text-white hover:bg-gray-700',
+    outline: 'border border-blue-600 text-blue-600 hover:bg-blue-50'
+  }
+  const sizes = {
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-4 py-2 text-base',
+    lg: 'px-6 py-3 text-lg'
+  }
+
+  return (
+    <button 
+      className={`${baseClasses} ${variants[variant]} ${sizes[size]}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  )
+}
+```
+
+**Nima uchun kerak:**
+- Reusable components
+- Consistent design
+- Easy maintenance
+- Props orqali customization
+
+#### **Layout Components**
+```typescript
+// components/layout/Header.tsx
+export const Header = () => {
+  const { theme, toggleTheme } = useUIStore()
+  const { data: categories } = useCategories()
+
+  return (
+    <header className="bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <Logo />
+          <Navigation categories={categories} />
+          <div className="flex items-center space-x-4">
+            <SearchBox />
+            <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          </div>
+        </div>
+      </div>
+    </header>
+  )
+}
+```
+
+### **Custom Hooks**
+
+#### **useNews Hook**
+```typescript
+// hooks/useNews.ts
+export const useNews = (params?: NewsParams) => {
+  return useQuery({
+    queryKey: ['news', params],
+    queryFn: () => newsApi.getNews(params),
+    staleTime: 5 * 60 * 1000, // 5 minut fresh
+    cacheTime: 10 * 60 * 1000, // 10 minut cache
+    refetchOnWindowFocus: false,
+  })
+}
+
+export const usePopularNews = () => {
+  return useQuery({
+    queryKey: ['news', 'popular'],
+    queryFn: newsApi.getPopularNews,
+    staleTime: 10 * 60 * 1000,
+  })
+}
+```
+
+**Nima uchun kerak:**
+- Logic reusability
+- Cleaner components
+- Centralized data fetching
+- Easy testing
+
+#### **useDebounce Hook**
+```typescript
+// hooks/useDebounce.ts
+export const useDebounce = (value: string, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value)
+    }, delay)
+
+    return () => {
+      clearTimeout(handler)
+    }
+  }, [value, delay])
+
+  return debouncedValue
+}
+```
+
+**Nima uchun kerak:**
+- Search input optimizatsiya
+- API call'larni kamaytirish
+- Better performance
+
+### **API Services**
+
+#### **News API Service**
+```typescript
+// services/api/newsApi.ts
+export const newsApi = {
+  getNews: async (params?: NewsParams): Promise<ApiResponse<News[]>> => {
+    const { data } = await api.get('/news', { params })
+    return data
+  },
+
+  getNewsById: async (id: string): Promise<ApiResponse<News>> => {
+    const { data } = await api.get(`/news/${id}`)
+    return data
+  },
+
+  getPopularNews: async (): Promise<ApiResponse<News[]>> => {
+    const { data } = await api.get('/news/popular')
+    return data
+  },
+
+  getNewsByCategory: async (categoryId: string): Promise<ApiResponse<News[]>> => {
+    const { data } = await api.get(`/news/category/${categoryId}`)
+    return data
+  },
+
+  searchNews: async (query: string): Promise<ApiResponse<News[]>> => {
+    const { data } = await api.get(`/news/search`, { params: { q: query } })
+    return data
+  }
+}
+```
+
+**Nima uchun kerak:**
+- Centralized API logic
+- Type safety
+- Error handling
+- Easy mock testing
+
+---
+
+## 🚀 Performance Optimizations
+
+### **1. Code Splitting**
+```typescript
+// App.tsx
+const Home = lazy(() => import('./pages/Home'))
+const NewsDetail = lazy(() => import('./pages/NewsDetail'))
+const Category = lazy(() => import('./pages/Category'))
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/news/:id" element={<NewsDetail />} />
+          <Route path="/category/:id" element={<Category />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  )
+}
+```
+
+**Nima uchun kerak:**
+- Initial bundle size kamayadi
+- Pages on-demand load bo'ladi
+- Faster initial loading
+
+### **2. Image Optimization**
+```typescript
+// components/common/OptimizedImage.tsx
+interface OptimizedImageProps {
+  src: string
+  alt: string
+  width?: number
+  height?: number
+  className?: string
+}
+
+export const OptimizedImage = ({ src, alt, width, height, className }: OptimizedImageProps) => {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [hasError, setHasError] = useState(false)
+
+  const handleLoad = () => setIsLoaded(true)
+  const handleError = () => setHasError(true)
+
+  return (
+    <div className={`relative ${className}`}>
+      {!isLoaded && !hasError && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />
+      )}
+      
+      {hasError ? (
+        <div className="flex items-center justify-center h-full bg-gray-100 rounded">
+          <span className="text-gray-400">Image not found</span>
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          loading="lazy"
+          onLoad={handleLoad}
+          onError={handleError}
+          className={`transition-opacity duration-300 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      )}
+    </div>
+  )
+}
+```
+
+**Nima uchun kerak:**
+- Lazy loading
+- Placeholder animation
+- Error handling
+- Smooth transitions
+
+### **3. Virtual Scrolling**
+```typescript
+// components/news/NewsList.tsx
+import { FixedSizeList as List } from 'react-window'
+
+interface NewsListProps {
+  news: News[]
+}
+
+const NewsItem = ({ index, style, data }: ListChildComponentProps) => (
+  <div style={style}>
+    <NewsCard news={data[index]} />
+  </div>
+)
+
+export const NewsList = ({ news }: NewsListProps) => {
+  return (
+    <List
+      height={600}
+      itemCount={news.length}
+      itemSize={200}
+      itemData={news}
+    >
+      {NewsItem}
+    </List>
+  )
+}
+```
+
+**Nima uchun kerak:**
+- Ko'p element bo'lganda performance
+- Memory usage optimization
+- Smooth scrolling
+
+---
+
+## 🔒 Security & Error Handling
+
+### **Error Boundary**
+```typescript
+// components/common/ErrorBoundary.tsx
+interface ErrorBoundaryState {
+  hasError: boolean
+  error?: Error
+  errorInfo?: ErrorInfo
+}
+
+export class ErrorBoundary extends React.Component<
+  React.PropsWithChildren<{}>,
+  ErrorBoundaryState
+> {
+  constructor(props: React.PropsWithChildren<{}>) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('ErrorBoundary caught an error:', error, errorInfo)
+    // Send to error reporting service
+    // errorReporter.captureException(error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center">
+            <div className="text-red-500 mb-4">
+              <ExclamationTriangleIcon className="mx-auto h-12 w-12" />
+            </div>
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">
+              Something went wrong
+            </h2>
+            <p className="text-gray-600 mb-4">
+              We're sorry for the inconvenience. Please try refreshing the page.
+            </p>
+            <Button onClick={() => window.location.reload()}>
+              Refresh Page
+            </Button>
+          </div>
+        </div>
+      )
+    }
+
+    return this.props.children
+  }
+}
+```
+
+**Nima uchun kerak:**
+- JavaScript errors handle qilish
+- App crash bo'lmasligi
+- User experience yaxshilash
+- Error reporting
+
+### **API Error Handling**
+```typescript
+// services/api/errorHandler.ts
+export const handleApiError = (error: AxiosError) => {
+  if (error.response) {
+    const { status, data } = error.response
+    
+    switch (status) {
+      case 400:
+        toast.error('Invalid request')
+        break
+      case 401:
+        toast.error('Please login again')
+        // Redirect to login
+        window.location.href = '/login'
+        break
+      case 403:
+        toast.error('Access denied')
+        break
+      case 404:
+        toast.error('Resource not found')
+        break
+      case 500:
+        toast.error('Server error. Please try again later.')
+        break
+      default:
+        toast.error('Something went wrong')
+    }
+  } else if (error.request) {
+    toast.error('Network error. Please check your connection.')
+  } else {
+    toast.error('Something went wrong')
+  }
+}
+```
+
+---
+
+## 📱 SEO & Accessibility
+
+### **React Helmet for SEO**
+```typescript
+// components/common/SEOHead.tsx
+interface SEOHeadProps {
+  title: string
+  description: string
+  keywords?: string
+  image?: string
+  url?: string
+}
+
+export const SEOHead = ({ title, description, keywords, image, url }: SEOHeadProps) => {
+  const siteTitle = 'News Website'
+  const fullTitle = `${title} | ${siteTitle}`
+  const currentUrl = url || window.location.href
+
+  return (
+    <Helmet>
+      <title>{fullTitle}</title>
+      <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
+      
+      {/* Open Graph */}
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={currentUrl} />
+      {image && <meta property="og:image" content={image} />}
+      
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      {image && <meta name="twitter:image" content={image} />}
+      
+      {/* JSON-LD Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "headline": title,
+          "description": description,
+          "url": currentUrl,
+          "datePublished": new Date().toISOString(),
+        })}
+      </script>
+    </Helmet>
+  )
+}
+```
+
+**Nima uchun kerak:**
+- Search engine optimization
+- Social media sharing
+- Better indexing
+- Rich snippets
+
+---
+
+## 🧪 Testing Strategy
+
+### **Unit Tests**
+```typescript
+// __tests__/components/NewsCard.test.tsx
+import { render, screen, fireEvent } from '@testing-library/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { NewsCard } from '../../components/news/NewsCard'
+
+const mockNews = {
+  id: '1',
+  title: 'Test News Title',
+  excerpt: 'Test news excerpt',
+  imageUrl: 'https://example.com/image.jpg',
+  publishedAt: '2024-01-01T00:00:00Z',
+  category: { id: '1', name: 'Technology' }
+}
+
+const renderWithQueryClient = (component: React.ReactElement) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  })
+  
+  return render(
+    <QueryClientProvider client={queryClient}>
+      {component}
+    </QueryClientProvider>
+  )
+}
+
+describe('NewsCard', () => {
+  it('renders news title and excerpt', () => {
+    renderWithQueryClient(<NewsCard news={mockNews} />)
+    
+    expect(screen.getByText('Test News Title')).toBeInTheDocument()
+    expect(screen.getByText('Test news excerpt')).toBeInTheDocument()
+  })
+
+  it('handles image loading error', () => {
+    renderWithQueryClient(<NewsCard news={mockNews} />)
+    
+    const image = screen.getByAltText('Test News Title')
+    fireEvent.error(image)
+    
+    expect(screen.getByText('Image not found')).toBeInTheDocument()
+  })
+})
+```
+
+### **Integration Tests**
+```typescript
+// __tests__/integration/NewsPage.test.tsx
+import { render, screen, waitFor } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
+import { NewsPage } from '../../pages/NewsPage'
+import { server } from '../mocks/server'
+
+describe('NewsPage Integration', () => {
+  it('fetches and displays news list', async () => {
+    render(
+      <BrowserRouter>
+        <NewsPage />
+      </BrowserRouter>
+    )
+
+    expect(screen.getByText('Loading...')).toBeInTheDocument()
+
+    await waitFor(() => {
+      expect(screen.getByText('Breaking News Title')).toBeInTheDocument()
+    })
+  })
+})
+```
+
+---
+
+## 🚀 Deployment & Production
+
+### **Environment Configuration**
+```typescript
+// utils/config.ts
+export const config = {
+  API_URL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
+  APP_NAME: import.meta.env.VITE_APP_NAME || 'News Website',
+  ANALYTICS_ID: import.meta.env.VITE_ANALYTICS_ID,
+  SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN,
+  isDevelopment: import.meta.env.DEV,
+  isProduction: import.meta.env.PROD,
+} as const
+
+// Type safety
+declare module 'vite/client' {
+  interface ImportMetaEnv {
+    readonly VITE_API_URL: string
+    readonly VITE_APP_NAME: string
+    readonly VITE_ANALYTICS_ID: string
+    readonly VITE_SENTRY_DSN: string
+  }
+}
+```
+
+### **Docker Configuration**
+```dockerfile
+# Dockerfile
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+### **GitHub Actions CI/CD**
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run test
+      - run: npm run build
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Vercel
+        uses: vercel/action@v1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+```
+
+---
+
+## 📊 Performance Monitoring
+
+### **Analytics Integration**
+```typescript
+// utils/analytics.ts
+import { gtag } from 'ga-gtag'
+
+export const analytics = {
+  pageView: (path: string) => {
+    if (typeof gtag !== 'undefined') {
+      gtag('config', config.ANALYTICS_ID, {
+        page_path: path,
+      })
+    }
+  },
+
+  event: (action: string, category: string, label?: string, value?: number) => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', action, {
+        event_category: category,
+        event_label: label,
+        value: value,
+      })
+    }
+  },
+
+  trackNewsView: (newsId: string, title: string) => {
+    analytics.event('view_news', 'news', `${newsId}-${title}`)
+  },
+
+  trackSearch: (query: string) => {
+    analytics.event('search', 'user_interaction', query)
+  },
+}
+```
+
+### **Error Monitoring**
+```typescript
+// utils/errorReporter.ts
+import * as Sentry from '@sentry/react'
+
+export const errorReporter = {
+  init: () => {
+    if (config.isProduction && config.SENTRY_DSN) {
+      Sentry.init({
+        dsn: config.SENTRY_DSN,
+        environment: config.isProduction ? 'production' : 'development',
+        integrations: [
+          new Sentry.BrowserTracing(),
+        ],
+        tracesSampleRate: 1.0,
+      })
+    }
+  },
+
+  captureException: (error: Error, context?: any) => {
+    console.error(error)
+    if (config.isProduction) {
+      Sentry.captureException(error, { extra: context })
+    }
+  },
+
+  captureMessage: (message: string, level: 'info' | 'warning' | 'error' = 'info') => {
+    console.log(message)
+    if (config.isProduction) {
+      Sentry.captureMessage(message, level)
+    }
+  },
+}
+```
+
+---
+
+## 🎯 Key Takeaways
+
+### **Nima uchun bu stack professional:**
+
+1. **Type Safety**: TypeScript butun codebase da type safety ta'minlaydi
+2. **Performance**: React Query caching, Lazy loading, Image optimization
+3. **Developer Experience**: Hot reloading, DevTools, ESLint/Prettier
+4. **Scalability**: Modular architecture, reusable components
+5. **Production Ready**: Error handling, monitoring, CI/CD
+6. **SEO Optimized**: Meta tags, structured data, fast loading
+7. **Accessibility**: ARIA labels, keyboard navigation, screen reader support
+
+### **Next Steps:**
+
+1. **Setup Project**: `npm create vite@latest news-website -- --template react-ts`
+2. **Install Dependencies**: Yuqoridagi package.json bo'yicha
+3. **Configure Tools**: ESLint, Prettier, Tailwind setup
+4. **Build Components**: UI components dan boshlab
+5. **API Integration**: Backend bilan bog'lash
+6. **Testing**: Unit va integration testlar yozish
+7. **Deployment**: Production ga deploy qilish
+
+Bu arxitektura real production loyiha uchun to'liq tayyor va barcha zamonaviy standartlarga javob beradi.
