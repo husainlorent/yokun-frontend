@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-
+import LogoPng from "/public/images/logo.png"
 const Logo = () => {
     return (
         <>
             <Link to={'/'} className='flex items-center'>
                 <img
                     alt='logo'
-                    src='/images/logo.png'
+                    src={LogoPng}
                     width={80}
                     height={96}
                     loading='eager'
