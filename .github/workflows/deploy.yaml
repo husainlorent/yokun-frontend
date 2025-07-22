@@ -21,6 +21,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
+      - name: Create .env file
+        run: |
+         echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > .env
+
       - name: Install and Build
         run: |
           rm -rf node_modules
