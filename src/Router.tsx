@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import { RouteError } from './components/common/RouteError'
 import Posts from './pages/posts/Posts'
 import NewsDetail from './pages/NewsDetail'
-import PostDetail from './pages/posts/PostDetail'
+import PostDetail from './pages/posts/postDetail/PostDetail'
 import AllNews from './pages/AllNews'
 
 const AppRouter = () => {
@@ -31,7 +31,7 @@ const AppRouter = () => {
                     element: <Posts />
                 },
                 {
-                    path: 'post/:id',
+                    path: 'post/:postId',
                     element: <PostDetail />
                 }
             ]

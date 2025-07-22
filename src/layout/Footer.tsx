@@ -36,7 +36,7 @@ const Footer = () => {
                     <div>
                         <ul className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-4 text-white'>
                             {navLinks.map(links => (
-                                <li>
+                                <li key={links.name}>
                                     <Link to={links.name} key={links.name}>
                                         {links.name}
                                     </Link>

@@ -1,9 +1,12 @@
-import { newsData } from '@/constants/newsData'
+import { useLatestPosts } from '@/hook/usePost';
 import SectionHeader from '../common/SectionHeader'
 import PostsCard from '../ui/post-card'
 import PostsCarousel from '../ui/post-carousel'
 
 const PopularNewsSection = () => {
+
+    const { data } = useLatestPosts();
+
     return (
         <section className='bg-hero-bg py-8 md:py-20'>
             <div className='container mx-auto'>
@@ -19,9 +22,9 @@ const PopularNewsSection = () => {
                     }}
                     className='mt-6'
                 >
-                    {newsData.map((item, index) => (
+                    {data?.map((item) => (
                         <PostsCard
-                            key={index}
+                            key={item.id}
                             data={item}
                             className='w-full sm:w-1/2 lg:w-1/3 xl:w-1/4'
                         />
