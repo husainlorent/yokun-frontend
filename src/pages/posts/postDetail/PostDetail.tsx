@@ -12,10 +12,12 @@ const PostDetail = () => {
 
   const { data: morePosts } = usePostByCategory(postData?.category?.category_id || '')
   const relatedNews = morePosts
-    ? morePosts.filter(item => item.id == (postData?.id || 0)).slice(0, 6)
+    ? morePosts.filter(item => item.id !== (postData?.id || 0)).slice(0, 6)
     : []
 
   if (isLoading) return <LoadingState />
+  
+  console.log(postData)
 
   return (
     <div className='min-h-screen bg-gradient-to-b from-gray-50 to-white'>
