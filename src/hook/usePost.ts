@@ -24,10 +24,10 @@ export const usePost = (id?: string) => {
   });
 };
 
-export const usePostByCategory = (id: string) => {
+export const usePostByCategory = (id: string, page: number = 1) => {
   return useQuery({
-    queryKey: POST_QUERY_KEYS.byCategory(id!),
-    queryFn: () => postApi.getPostByCategoryId(id!),
+    queryKey: [...POST_QUERY_KEYS.byCategory(id), page], 
+    queryFn: () => postApi.getPostByCategoryId(id, page),
     enabled: Boolean(id),
   });
 };

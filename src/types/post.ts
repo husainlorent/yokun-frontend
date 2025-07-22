@@ -20,9 +20,15 @@ export interface IPost {
   createdAt: string;
 }
 
+export interface PaginationInfo {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
 export interface PostsResponse {
-  posts: IPost[];
-  total: number;
-  page: number;
-  limit: number;
+  data: IPost[];
+  pagination: PaginationInfo;
 }

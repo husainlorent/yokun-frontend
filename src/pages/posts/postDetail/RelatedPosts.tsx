@@ -9,8 +9,8 @@ interface PostDetailSidebarProps {
 
 export const  RelatedPosts = ({ relatedPosts }: PostDetailSidebarProps) => {
   return (
-    <div className='sticky top-14 space-y-4'>
-      <div className='pl-3 h-full'>
+    <div className='sticky top-14 space-y-4 '>
+      <div className='pl-3 h-full '>
         <div className='mb-5 flex items-center'>
           <div className='mr-3 h-6 w-1 rounded bg-blue-500' />
           <h3 className='text-xl font-bold text-gray-900'>O'xshash m'aqolalar</h3>

@@ -768,7 +768,14 @@
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.1.6.tgz"
   integrity sha512-4hOiT/dwO8Ko0gV1m/TJZYk3y0KBnY9vzDh7W+DH17b2HFSOGgdj33dhihPeuy3l0q23+4e+hoXHV6hCC4dCXw==
 
-"@types/react@^19.1.8":
+"@types/react-paginate@^7.1.4":
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/@types/react-paginate/-/react-paginate-7.1.4.tgz#b0c7fd53f4b3d65ff37a7c45d58d5741d84dc6ea"
+  integrity sha512-6fqZvDzRJHubOGl6c7cGFC9ysgQSWYy0Gpus9HjORpydlcXgPnT8x+aKgqwCdtpZrRTwcBz2Q7JWAOYaRrsXGg==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^19.1.8":
   version "19.1.8"
   resolved "https://registry.npmjs.org/@types/react/-/react-19.1.8.tgz"
   integrity sha512-AwAfQ2Wa5bCx9WP8nZL2uMZWod7J7/JSplxbTmBQ5ms6QpqNYm672H0Vu9ZVKVngQ+ii4R/byguVEUZQyeg44g==
@@ -1534,7 +1541,7 @@ jiti@^2.4.2:
   resolved "https://registry.npmjs.org/jiti/-/jiti-2.4.2.tgz"
   integrity sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==
 
-js-tokens@^4.0.0:
+"js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
@@ -1666,6 +1673,13 @@ lodash.merge@^4.6.2:
   resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
+loose-envify@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
+  integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+  dependencies:
+    js-tokens "^3.0.0 || ^4.0.0"
+
 lru-cache@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz"
@@ -1766,6 +1780,11 @@ node-releases@^2.0.19:
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.19.tgz"
   integrity sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==
 
+object-assign@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  integrity sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==
+
 optionator@^0.9.3:
   version "0.9.4"
   resolved "https://registry.npmjs.org/optionator/-/optionator-0.9.4.tgz"
@@ -1848,6 +1867,15 @@ prettier@^3.6.2:
   resolved "https://registry.npmjs.org/prettier/-/prettier-3.6.2.tgz"
   integrity sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==
 
+prop-types@^15:
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
+  integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.13.1"
+
 proxy-from-env@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz"
@@ -1869,6 +1897,18 @@ react-dom@^19.1.0:
   integrity sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==
   dependencies:
     scheduler "^0.26.0"
+
+react-is@^16.13.1:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-paginate@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-8.3.0.tgz#911a625b34fb2bb3b659803cd7f2d365af3c179b"
+  integrity sha512-TptZE37HPkT3R+7AszWA++LOTIsIHXcCSWMP9WW/abeF8sLpJzExFB/dVs7xbtqteJ5njF6kk+udTDC0AR3y5w==
+  dependencies:
+    prop-types "^15"
 
 react-refresh@^0.17.0:
   version "0.17.0"

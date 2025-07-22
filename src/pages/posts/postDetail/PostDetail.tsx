@@ -1,23 +1,24 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { usePost, usePostByCategory } from '@/hook/usePost'
 import { PostDetailHeader } from './PostDetailHeader'
 import { ChevronRight, ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { LoadingState } from './LoadingState'
 import { RelatedPosts } from './RelatedPosts'
+import { getYoutubeEmbedUrl } from '@/utils/getYoutubeEmbedUrl'
 
 const PostDetail = () => {
   const { postId } = useParams()
-  const { data: postData, isLoading } = usePost(postId ?? '')
-
-  const { data: morePosts } = usePostByCategory(postData?.category?.category_id || '')
-  const relatedPosts = morePosts
-    ? morePosts.filter(item => item.id !== (postData?.id || 0)).slice(0, 6)
-    : []
-
-  if (isLoading) return <LoadingState />
+  const navigate = useNavigate();
   
 
+  const { data: postData, isLoading } = usePost(postId ?? '')
+  const { data: morePosts } = usePostByCategory(postData?.category?.category_id || '')
+  const relatedPosts = morePosts?.data
+    ? morePosts?.data.filter(item => item.id !== (postData?.id || 0)).slice(0, 6)
+    : []
+
+  if (isLoading) { return <LoadingState /> }
 
   return (
     <div className='min-h-screen bg-gradient-to-b from-gray-50 to-white'>
@@ -27,12 +28,12 @@ const PostDetail = () => {
             Asosiy
           </Link>
           <ChevronRight className='h-4 w-4 text-gray-400' />
-          <Link
-            to='/posts'
-            className='font-medium transition-colors duration-200 hover:text-blue-600'
+          <button
+            onClick={() => navigate(-1)}
+            className='font-medium transition-colors duration-200 hover:text-blue-600 cursor-pointer'
           >
             Postlar
-          </Link>
+          </button>
           <ChevronRight className='h-4 w-4 text-gray-400' />
           <span className='truncate font-medium text-gray-900'>{postData?.title}</span>
         </nav>
@@ -61,6 +62,19 @@ const PostDetail = () => {
                         allowFullScreen
                       />
                     </div>
+                  </div>
+                )}
+
+                {postData?.video_link_youtube && getYoutubeEmbedUrl(postData.video_link_youtube) && (
+                  <div className='mt-8 rounded-xl'>
+
+                    <iframe
+                      src={getYoutubeEmbedUrl(postData.video_link_youtube)!}
+                      className='h-[500px] w-full rounded-lg border border-gray-200 shadow-sm sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
+                      title='YouTube video'
+                      allowFullScreen
+                    />
+
                   </div>
                 )}
 
