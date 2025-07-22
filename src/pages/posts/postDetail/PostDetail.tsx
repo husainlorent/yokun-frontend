@@ -1,17 +1,17 @@
 import { useParams } from 'react-router-dom'
 import { usePost, usePostByCategory } from '@/hook/usePost'
 import { PostDetailHeader } from './PostDetailHeader'
-import { PostDetailSidebar } from './PostDetailSidebar'
 import { ChevronRight, ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { LoadingState } from './LoadingState'
+import { RelatedPosts } from './RelatedPosts'
 
 const PostDetail = () => {
   const { postId } = useParams()
   const { data: postData, isLoading } = usePost(postId ?? '')
 
   const { data: morePosts } = usePostByCategory(postData?.category?.category_id || '')
-  const relatedNews = morePosts
+  const relatedPosts = morePosts
     ? morePosts.filter(item => item.id !== (postData?.id || 0)).slice(0, 6)
     : []
 
@@ -82,7 +82,7 @@ const PostDetail = () => {
           </div>
 
           <div className='lg:col-span-1'>
-            <PostDetailSidebar relatedNews={relatedNews} />
+            <RelatedPosts relatedPosts={relatedPosts} />
           </div>
         </div>
 

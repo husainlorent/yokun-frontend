@@ -23,9 +23,7 @@ const PostsCard: React.FC<PostsCardProps> = ({ data, className = "" }) => {
           </div>
 
           <div className="p-4 space-y-2 h-32 bg-white">
-            <span className="text-xs text-gray-500">
-              <FormattedDate date={data.createdAt} className="text-xs" />
-            </span>
+              <FormattedDate date={data.createdAt} className="text-xs text-gray-500" />
             <h3 className="font-semibold text-black leading-tight line-clamp-3 group-hover:text-blue-600 transition-colors">
               {data.title}
             </h3>

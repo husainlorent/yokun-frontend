@@ -27,7 +27,7 @@ const AppRouter = () => {
                     element: <NewsDetail />
                 },
                 {
-                    path: 'posts',
+                    path: 'posts/:categoryId',
                     element: <Posts />
                 },
                 {

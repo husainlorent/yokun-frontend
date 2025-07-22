@@ -1,7 +1,6 @@
 import { api } from "@/api/axios";
 import type { IPost, PostsResponse } from "@/types/post";
 
-
 export const postApi = {
 getLatestPosts: async (): Promise<IPost[]> => {
   const { data } = await api.get('/post/latest');
@@ -22,7 +21,7 @@ getPostByCategoryId: async (id: string): Promise<IPost[]> => {
     limit?: number;
     category?: string;
   }): Promise<PostsResponse> => {
-    const { data } = await api.get<PostsResponse>('/posts', { params });
+    const { data } = await api.get('/posts', { params });
     return data;
   }
 };
