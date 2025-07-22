@@ -6,7 +6,7 @@ import PostsCarousel from '../ui/post-carousel'
 const PopularNewsSection = () => {
 
     const { data } = useLatestPosts();
-
+  console.log(data)
     return (
         <section className='bg-hero-bg py-8 md:py-20'>
             <div className='container mx-auto'>
