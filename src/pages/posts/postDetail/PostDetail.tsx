@@ -28,12 +28,11 @@ const PostDetail = () => {
             onClick={() => navigate(-1)}
             className='font-medium transition-colors duration-200 hover:text-blue-600 cursor-pointer'
           >
-            Postlar
+            Maqolalar
           </button>
           <ChevronRight className='h-4 w-4 text-gray-400' />
           <span className='truncate font-medium text-gray-900'>{postData?.title}</span>
         </nav>
-
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
           <div className='lg:col-span-3'>
             <article className='overflow-hidden'>

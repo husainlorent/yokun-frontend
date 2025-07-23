@@ -9,7 +9,7 @@ interface PostDetailHeaderProps {
 export const PostDetailHeader = ({ postData }: PostDetailHeaderProps) => {
 
     return (
-        <header className="pb-4 border-b border-gray-100">
+        <header className="pb-4">
             <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 {postData?.title}
             </h1>

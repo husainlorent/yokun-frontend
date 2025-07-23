@@ -11,7 +11,6 @@ interface FeaturedNewsProps {
     error?: Error | string | null
 }
 const FeaturedNews: React.FC<FeaturedNewsProps> = ({ data, isLoading, error }) => {
-
     if (isLoading) {
         return <FeaturedNewsSkeleton />
     }
@@ -21,6 +20,8 @@ const FeaturedNews: React.FC<FeaturedNewsProps> = ({ data, isLoading, error }) =
             <ErrorState />
         )
     }
+
+
 
     return (
         <div className='h-full'>
