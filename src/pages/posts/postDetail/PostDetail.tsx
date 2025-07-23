@@ -10,7 +10,7 @@ import { LoadingDetailState } from '@/components/common/LoadingDetailState'
 const PostDetail = () => {
   const { postId } = useParams()
   const navigate = useNavigate();
-  
+
 
   const { data: postData, isLoading } = usePost(postId ?? '')
 
@@ -91,7 +91,9 @@ const PostDetail = () => {
           </div>
 
           <div className='lg:col-span-1'>
-            <RelatedPosts categoryId={postData?.category.category_id} />
+            <RelatedPosts
+              categoryId={postData?.category.category_id}
+              currentPostId={postData?.id} />
           </div>
         </div>
 

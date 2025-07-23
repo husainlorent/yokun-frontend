@@ -7,13 +7,14 @@ import { RelatedSkeleton } from '@/components/common/RelatedSkeleton'
 
 interface PostDetailSidebarProps {
   categoryId: string | undefined
+  currentPostId?: string | number
 }
 
-export const RelatedPosts: React.FC<PostDetailSidebarProps> = ({ categoryId }) => {
+export const RelatedPosts: React.FC<PostDetailSidebarProps> = ({ categoryId ,currentPostId}) => {
 
   const { data: morePosts, isLoading } = usePostByCategory(categoryId || '')
-  const relatedPosts = morePosts?.data
-    ? morePosts?.data.filter(item => item.id !== (categoryId || 0)).slice(0, 6)
+ const relatedPosts = morePosts?.data
+    ? morePosts?.data.filter(item => item.id !== currentPostId).slice(0, 6)
     : []
     
   if (isLoading) return <RelatedSkeleton />
