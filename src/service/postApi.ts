@@ -1,5 +1,5 @@
 import { api } from "@/api/axios";
-import type { IPost, PostsResponse } from "@/types/post";
+import type { IPost, PostsResponse } from "@/types/post.interface";
 
 export const postApi = {
   getLatestPosts: async (): Promise<IPost[]> => {

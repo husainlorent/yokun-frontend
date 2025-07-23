@@ -1,4 +1,4 @@
-const ErrorState = ({ onRetry }: { onRetry: () => void }) => (
+const ErrorState = () => (
     <div className='text-center py-12'>
         <div className='max-w-md mx-auto'>
             <div className='text-red-500 mb-4'>
@@ -8,12 +8,12 @@ const ErrorState = ({ onRetry }: { onRetry: () => void }) => (
             </div>
             <h3 className='text-lg font-semibold text-gray-900 mb-2'>Xatolik yuz berdi</h3>
             <p className='text-gray-600 mb-6'>Ma'lumotlarni yuklashda muammo bo'ldi</p>
-            <button
+            {/* <button
                 onClick={onRetry}
                 className='inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'
             >
                 Qayta urinish
-            </button>
+            </button> */}
         </div>
     </div>
 )

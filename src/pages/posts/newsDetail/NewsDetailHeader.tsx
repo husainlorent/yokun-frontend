@@ -1,9 +1,9 @@
 import { Calendar, Eye } from "lucide-react";
 import { FormattedDate } from "@/components/common/FormattedDate";
-import type { IPost } from "@/types/post.interface";
+import type { INews } from "@/types/news.interface";
 
 interface PostDetailHeaderProps {
-    postData?: IPost;
+    postData?: INews;
 }
 
 export const PostDetailHeader = ({ postData }: PostDetailHeaderProps) => {

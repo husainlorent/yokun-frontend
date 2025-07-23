@@ -25,7 +25,7 @@ const Pagination = ({
         containerClassName='flex items-center space-x-1'
         pageClassName='hidden sm:block'
         pageLinkClassName='px-3 py-2 text-sm font-medium   border border-gray-300 cursor-pointer hover:text-blue-600 transition-colors rounded-md'
-        activeClassName='bg-blue-600 text-white border-blue-600'
+        activeClassName='bg-blue-600 text-white '
         activeLinkClassName='bg-blue-600 text-white hover:bg-blue-700 hover:text-white'
 
         previousClassName='mr-2'

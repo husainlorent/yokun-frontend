@@ -1,4 +1,4 @@
-export const LoadingState = () => {
+export const LoadingDetailState = () => {
   return (
     <div className="container mx-auto py-8 min-h-screen">
       <div className="animate-pulse space-y-6">
@@ -56,4 +56,4 @@ export const LoadingState = () => {
       </div>
     </div>
   );
-};
+}

@@ -1,7 +1,7 @@
-import PopularNews from '@/components/sections/PopularNews'
+import PopularNews from '@/components/sections/popularNews/PopularNews'
 import { SEOHead } from '../components/common/SEOHead'
 import Hero from '../components/sections/hero/Hero'
-import PopularNewsSection from '@/components/sections/PopularPosts'
+import PopularNewsSection from '@/components/sections/popularPosts/PopularPosts'
 
 
 

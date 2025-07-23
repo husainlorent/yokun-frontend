@@ -18,7 +18,7 @@ const Posts = () => {
   const currentPage = Math.max(1, parseInt(searchParams.get('page') || '', 10) || 1);
 
 
-  const { data: response, isLoading, error, refetch } = usePostByCategory(categoryId || "", currentPage)
+  const { data: response, isLoading, error } = usePostByCategory(categoryId || "", currentPage)
 
   const { posts, pagination } = useMemo(() => {
     if (!response) {
@@ -53,7 +53,7 @@ const Posts = () => {
     return (
       <div className='container mx-auto px-4 py-8 min-h-screen'>
         <SectionHeader title='Maqolalar' className='py-8' />
-        <ErrorState onRetry={() => refetch()} />
+        <ErrorState />
       </div>
     )
   }
@@ -88,11 +88,14 @@ const Posts = () => {
             aria-label={`${post.title} maqolasini o'qish`}
           >
             <div className='w-full md:w-1/3 overflow-hidden'>
-              <OptimizedImage
-                src={post.image || ""}
-                alt={post.title || 'Maqola rasmi'}
-                className='h-52 w-full object-cover md:h-72 group-hover:scale-105 transition-transform duration-300'
-              />
+              {post.image ? (
+                <OptimizedImage
+                  src={post.image}
+                  alt={post.title || 'Maqola rasmi'}
+                  className='h-52 w-full object-cover md:h-72 group-hover:scale-105 transition-transform duration-300'
+                />
+              ) : null}
+
             </div>
             <div className='flex-1 p-6'>
               <div className='flex h-full flex-col'>

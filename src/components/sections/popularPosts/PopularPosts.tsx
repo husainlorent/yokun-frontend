@@ -1,11 +1,16 @@
 import { useLatestPosts } from '@/hook/usePost';
-import SectionHeader from '../common/SectionHeader'
-import PostsCard from '../ui/post-card'
-import PostsCarousel from '../ui/post-carousel'
+import SectionHeader from '../../common/SectionHeader'
+import PostsCard from '../../ui/post-card'
+import PostsCarousel from '../../ui/post-carousel'
+import PopularPostsSkeleton from './PostsCardSkeleton';
 
 const PopularNewsSection = () => {
 
-    const { data } = useLatestPosts();
+    const { data, isLoading,error } = useLatestPosts();
+
+    if (isLoading) return <PopularPostsSkeleton />
+    if (!data || error) return <PopularPostsSkeleton />
+
     return (
         <section className='bg-hero-bg py-8 md:py-20'>
             <div className='container mx-auto'>

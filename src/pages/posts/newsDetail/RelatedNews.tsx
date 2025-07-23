@@ -2,33 +2,31 @@ import { Eye } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { FormattedDate } from '@/components/common/FormattedDate'
 import { OptimizedImage } from '@/components/ui/optimized-image'
-import { usePostByCategory } from '@/hook/usePost'
+import { useRelated } from '@/hook/useNews'
 import { RelatedSkeleton } from '@/components/common/RelatedSkeleton'
 
-interface PostDetailSidebarProps {
-  categoryId: string | undefined
+interface NewsDetailSidebarProps {
+  currentId: string | undefined
 }
 
-export const RelatedPosts: React.FC<PostDetailSidebarProps> = ({ categoryId }) => {
 
-  const { data: morePosts, isLoading } = usePostByCategory(categoryId || '')
-  const relatedPosts = morePosts?.data
-    ? morePosts?.data.filter(item => item.id !== (categoryId || 0)).slice(0, 6)
-    : []
-    
-  if (isLoading) return <RelatedSkeleton />
+export const RelatedPosts: React.FC<NewsDetailSidebarProps> = ({ currentId }) => {
+
+  const { data: relatedNews, isLoading } = useRelated(currentId ?? "")
+
+  if (isLoading) return <RelatedSkeleton/>
 
   return (
     <div className='sticky top-14 space-y-4 '>
       <div className='pl-3 h-full '>
         <div className='mb-5 flex items-center'>
           <div className='mr-3 h-6 w-1 rounded bg-blue-500' />
-          <h3 className='text-xl font-bold text-gray-900'>O'xshash m'aqolalar</h3>
+          <h3 className='text-xl font-bold text-gray-900'>O'xshash yangiliklar</h3>
         </div>
 
         <div className='space-y-4'>
-          {relatedPosts.length > 0 ? (
-            relatedPosts.map((item) => (
+          {relatedNews && relatedNews.length > 0 ? (
+            relatedNews?.map((item) => (
               <Link key={item.id} to={`/post/${item.id}`} className='group block'>
                 <div className='flex gap-4 rounded-xl py-2 transition-all duration-200 hover:bg-gray-50'>
                   <div className='relative h-16 w-20 shrink-0 overflow-hidden rounded-lg'>

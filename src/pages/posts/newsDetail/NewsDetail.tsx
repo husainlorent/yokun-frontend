@@ -1,19 +1,16 @@
-import { useNavigate, useParams } from 'react-router-dom'
-import { usePost } from '@/hook/usePost'
-import { PostDetailHeader } from './PostDetailHeader'
+import { useParams } from 'react-router-dom'
+import { PostDetailHeader } from './NewsDetailHeader'
 import { ChevronRight, ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { RelatedPosts } from './RelatedPosts'
+
+import { RelatedPosts } from './RelatedNews'
 import { getYoutubeEmbedUrl } from '@/utils/getYoutubeEmbedUrl'
+import { useNews } from '@/hook/useNews'
 import { LoadingDetailState } from '@/components/common/LoadingDetailState'
 
-const PostDetail = () => {
-  const { postId } = useParams()
-  const navigate = useNavigate();
-  
-
-  const { data: postData, isLoading } = usePost(postId ?? '')
-
+const NewsDetail = () => {
+  const { newsId } = useParams()
+  const { data: newsData, isLoading } = useNews(newsId ?? '')
   if (isLoading) { return <LoadingDetailState /> }
 
   return (
@@ -24,35 +21,34 @@ const PostDetail = () => {
             Asosiy
           </Link>
           <ChevronRight className='h-4 w-4 text-gray-400' />
-          <button
-            onClick={() => navigate(-1)}
+          <Link
+            to={'/news'}
             className='font-medium transition-colors duration-200 hover:text-blue-600 cursor-pointer'
           >
-            Postlar
-          </button>
+            yangiliklar
+          </Link>
           <ChevronRight className='h-4 w-4 text-gray-400' />
-          <span className='truncate font-medium text-gray-900'>{postData?.title}</span>
+          <span className='truncate font-medium text-gray-900'>{newsData?.title}</span>
         </nav>
 
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
           <div className='lg:col-span-3'>
             <article className='overflow-hidden'>
-              <PostDetailHeader postData={postData} />
-
+              <PostDetailHeader postData={newsData} />
               <div>
                 <div
                   className='prose prose-lg prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-ul:text-gray-700 prose-ol:text-gray-700 prose-li:text-gray-700 prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:p-4 prose-blockquote:rounded-r-lg max-w-none [&_img]:my-6 [&_img]:rounded-xl [&_img]:border [&_img]:border-gray-200 [&_img]:shadow-lg'
-                  dangerouslySetInnerHTML={{ __html: postData?.content || '' }}
+                  dangerouslySetInnerHTML={{ __html: newsData?.content || '' }}
                 />
 
-                {postData?.file && (
+                {newsData?.file && (
                   <div className='mt-8'>
                     <div className='rounded-xl bg-gray-50 p-4'>
                       <h3 className='mb-4 text-lg font-semibold text-gray-900'>
                         Qo'shimcha hujjat
                       </h3>
                       <iframe
-                        src={postData.file}
+                        src={newsData.file}
                         className='h-[500px] w-full rounded-lg border border-gray-200 shadow-sm sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
                         title='Hujjat'
                         allowFullScreen
@@ -61,11 +57,11 @@ const PostDetail = () => {
                   </div>
                 )}
 
-                {postData?.video_link_youtube && getYoutubeEmbedUrl(postData.video_link_youtube) && (
+                {newsData?.video_link_youtube && getYoutubeEmbedUrl(newsData.video_link_youtube) && (
                   <div className='mt-8 rounded-xl'>
 
                     <iframe
-                      src={getYoutubeEmbedUrl(postData.video_link_youtube)!}
+                      src={getYoutubeEmbedUrl(newsData.video_link_youtube)!}
                       className='h-[500px] w-full rounded-lg border border-gray-200 shadow-sm sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
                       title='YouTube video'
                       allowFullScreen
@@ -74,12 +70,12 @@ const PostDetail = () => {
                   </div>
                 )}
 
-                {postData?.video && (
+                {newsData?.video && (
                   <div className='mt-8'>
                     <div className='rounded-xl p-4'>
                       <h3 className='mb-4 text-lg font-semibold text-gray-900'>Video material</h3>
                       <video
-                        src={postData.video}
+                        src={newsData.video}
                         controls
                         className='h-[500px] w-full rounded-lg sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
                         title='Video'
@@ -92,8 +88,8 @@ const PostDetail = () => {
           </div>
 
           <div className='lg:col-span-1'>
-            <RelatedPosts categoryId={postData?.category.category_id} />
-          </div>
+            <RelatedPosts currentId={newsData?.id} />
+          </div> 
         </div>
 
         <div className='mt-16 border-t border-gray-200 pt-8'>
@@ -110,4 +106,4 @@ const PostDetail = () => {
   )
 }
 
-export default PostDetail
+export default NewsDetail
