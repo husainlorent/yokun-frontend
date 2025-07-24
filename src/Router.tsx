@@ -3,9 +3,9 @@ import Layout from './layout/Layout'
 import Home from './pages/Home'
 import { RouteError } from './components/common/RouteError'
 import Posts from './pages/posts/Posts'
-import PostDetail from './pages/posts/postDetail/PostDetail'
+import PostDetail from './pages/postDetail/PostDetail'
 import AllNews from './pages/AllNews'
-import NewsDetail from './pages/posts/newsDetail/NewsDetail'
+import NewsDetail from './pages/newsDetail/NewsDetail'
 
 const AppRouter = () => {
     const router = createBrowserRouter([

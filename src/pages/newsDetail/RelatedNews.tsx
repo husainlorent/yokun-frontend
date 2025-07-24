@@ -27,7 +27,7 @@ export const RelatedPosts: React.FC<NewsDetailSidebarProps> = ({ currentId }) =>
         <div className='space-y-4'>
           {relatedNews && relatedNews.length > 0 ? (
             relatedNews?.map((item) => (
-              <Link key={item.id} to={`/post/${item.id}`} className='group block'>
+              <Link key={item.id} to={`/news/${item.id}`} className='group block'>
                 <div className='flex gap-4 rounded-xl py-2 transition-all duration-200 hover:bg-gray-50'>
                   <div className='relative h-16 w-20 shrink-0 overflow-hidden rounded-lg'>
                     {item.image ? (

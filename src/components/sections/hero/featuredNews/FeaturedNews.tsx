@@ -39,7 +39,7 @@ const FeaturedNews: React.FC<FeaturedNewsProps> = ({ data, isLoading, error }) =
                             /> : null
                     }
                 </div>
-                <h2 className='line-clamp-3 pt-2 text-xl leading-tight font-semibold text-black transition-colors duration-200 group-hover:text-blue-600 md:text-3xl lg:line-clamp-2 lg:text-4xl'>
+                <h2 className='line-clamp-3 pt-2 text-xl leading-tight font-semibold text-black transition-colors duration-200 group-hover:text-blue-600 md:text-3xl lg:line-clamp-2'>
                     {data.title}
                 </h2>
             </Link>
