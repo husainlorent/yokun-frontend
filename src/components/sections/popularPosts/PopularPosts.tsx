@@ -3,10 +3,12 @@ import SectionHeader from '../../common/SectionHeader'
 import PostsCard from '../../ui/post-card'
 import PostsCarousel from '../../ui/post-carousel'
 import PopularPostsSkeleton from './PostsCardSkeleton';
+import { useTranslation } from 'react-i18next';
 
 const PopularNewsSection = () => {
 
     const { data, isLoading,error } = useLatestPosts();
+  const { t } = useTranslation("common")
 
     if (isLoading) return <PopularPostsSkeleton />
     if (!data || error) return <PopularPostsSkeleton />
@@ -14,7 +16,7 @@ const PopularNewsSection = () => {
     return (
         <section className='bg-hero-bg py-8 md:py-20'>
             <div className='container mx-auto'>
-                <SectionHeader title='Maqolalar' />
+                <SectionHeader title={t("articles")} />
                 <PostsCarousel
                     options={{
                         align: 'start',

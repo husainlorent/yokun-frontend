@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom'
 import { RelatedPosts } from './RelatedPosts'
 import { getYoutubeEmbedUrl } from '@/utils/getYoutubeEmbedUrl'
 import { LoadingDetailState } from '@/components/common/LoadingDetailState'
+import { useTranslation } from 'react-i18next'
 
 const PostDetail = () => {
   const { postId } = useParams()
   const navigate = useNavigate();
-
+  const {t}= useTranslation("common")
 
   const { data: postData, isLoading } = usePost(postId ?? '')
 
@@ -21,14 +22,14 @@ const PostDetail = () => {
       <div className='container mx-auto py-8'>
         <nav className='mb-8 flex items-center space-x-2 overflow-x-auto text-sm text-gray-600'>
           <Link to='/' className='font-medium transition-colors duration-200 hover:text-blue-600'>
-            Asosiy
+            {t("home")}
           </Link>
           <ChevronRight className='h-4 w-4 text-gray-400' />
           <button
             onClick={() => navigate(-1)}
             className='font-medium transition-colors duration-200 hover:text-blue-600 cursor-pointer'
           >
-            Maqolalar
+            {t("articles")}
           </button>
           <ChevronRight className='h-4 w-4 text-gray-400' />
           <span className='truncate font-medium text-gray-900'>{postData?.title}</span>
@@ -47,9 +48,6 @@ const PostDetail = () => {
                 {postData?.file && (
                   <div className='mt-8'>
                     <div className='rounded-xl bg-gray-50 p-4'>
-                      <h3 className='mb-4 text-lg font-semibold text-gray-900'>
-                        Qo'shimcha hujjat
-                      </h3>
                       <iframe
                         src={postData.file}
                         className='h-[500px] w-full rounded-lg border border-gray-200 shadow-sm sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
@@ -62,7 +60,6 @@ const PostDetail = () => {
 
                 {postData?.video_link_youtube && getYoutubeEmbedUrl(postData.video_link_youtube) && (
                   <div className='mt-8 rounded-xl'>
-
                     <iframe
                       src={getYoutubeEmbedUrl(postData.video_link_youtube)!}
                       className='h-[500px] w-full rounded-lg border border-gray-200 shadow-sm sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
@@ -76,7 +73,6 @@ const PostDetail = () => {
                 {postData?.video && (
                   <div className='mt-8'>
                     <div className='rounded-xl p-4'>
-                      <h3 className='mb-4 text-lg font-semibold text-gray-900'>Video material</h3>
                       <video
                         src={postData.video}
                         controls
@@ -103,7 +99,7 @@ const PostDetail = () => {
             className='group inline-flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-6 py-3 text-gray-700 shadow-sm transition-all duration-200 hover:border-blue-200 hover:bg-gray-50 hover:text-blue-600 hover:shadow-md'
           >
             <ArrowLeft className='h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1' />
-            <span className='font-medium'>Asosiy sahifaga qaytish</span>
+            <span className='font-medium'>{t("backToHome")}</span>
           </Link>
         </div>
       </div>

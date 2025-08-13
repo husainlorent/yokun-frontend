@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 
 interface FormattedDateProps {
   date: string | Date;
@@ -47,8 +48,7 @@ const formatDateByLocale = (dateObj: Date, locale: string): string => {
 };
 
 export function FormattedDate({ date, className }: FormattedDateProps) {
-  const locale = "uz"; // uz, kr
-
+  const locale = i18n.language === 'kr' ? 'kr' : 'uz';
   const formatDate = (date: string | Date) => {
     const dateObj = new Date(date);
     if (isNaN(dateObj.getTime())) {

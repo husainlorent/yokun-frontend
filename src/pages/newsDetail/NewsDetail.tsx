@@ -7,25 +7,29 @@ import { RelatedPosts } from './RelatedNews'
 import { getYoutubeEmbedUrl } from '@/utils/getYoutubeEmbedUrl'
 import { useNews } from '@/hook/useNews'
 import { LoadingDetailState } from '@/components/common/LoadingDetailState'
+import { useTranslation } from 'react-i18next'
 
 const NewsDetail = () => {
+  const { t } = useTranslation('common')
   const { newsId } = useParams()
   const { data: newsData, isLoading } = useNews(newsId ?? '')
-  if (isLoading) { return <LoadingDetailState /> }
+  if (isLoading) {
+    return <LoadingDetailState />
+  }
 
   return (
     <div className='min-h-screen bg-gradient-to-b from-gray-50 to-white'>
       <div className='container mx-auto py-8'>
         <nav className='mb-8 flex items-center space-x-2 overflow-x-auto text-sm text-gray-600'>
           <Link to='/' className='font-medium transition-colors duration-200 hover:text-blue-600'>
-            Asosiy
+            {t('home')}
           </Link>
           <ChevronRight className='h-4 w-4 text-gray-400' />
           <Link
             to={'/news'}
-            className='font-medium transition-colors duration-200 hover:text-blue-600 cursor-pointer'
+            className='cursor-pointer font-medium transition-colors duration-200 hover:text-blue-600'
           >
-            yangiliklar
+            {t('news')}
           </Link>
           <ChevronRight className='h-4 w-4 text-gray-400' />
           <span className='truncate font-medium text-gray-900'>{newsData?.title}</span>
@@ -44,9 +48,6 @@ const NewsDetail = () => {
                 {newsData?.file && (
                   <div className='mt-8'>
                     <div className='rounded-xl bg-gray-50 p-4'>
-                      <h3 className='mb-4 text-lg font-semibold text-gray-900'>
-                        Qo'shimcha hujjat
-                      </h3>
                       <iframe
                         src={newsData.file}
                         className='h-[500px] w-full rounded-lg border border-gray-200 shadow-sm sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
@@ -57,23 +58,21 @@ const NewsDetail = () => {
                   </div>
                 )}
 
-                {newsData?.video_link_youtube && getYoutubeEmbedUrl(newsData.video_link_youtube) && (
-                  <div className='mt-8 rounded-xl'>
-
-                    <iframe
-                      src={getYoutubeEmbedUrl(newsData.video_link_youtube)!}
-                      className='h-[500px] w-full rounded-lg border border-gray-200 shadow-sm sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
-                      title='YouTube video'
-                      allowFullScreen
-                    />
-
-                  </div>
-                )}
+                {newsData?.video_link_youtube &&
+                  getYoutubeEmbedUrl(newsData.video_link_youtube) && (
+                    <div className='mt-8 rounded-xl'>
+                      <iframe
+                        src={getYoutubeEmbedUrl(newsData.video_link_youtube)!}
+                        className='h-[500px] w-full rounded-lg border border-gray-200 shadow-sm sm:h-[600px] lg:h-[540px] lg:max-h-[700px]'
+                        title='YouTube video'
+                        allowFullScreen
+                      />
+                    </div>
+                  )}
 
                 {newsData?.video && (
                   <div className='mt-8'>
                     <div className='rounded-xl p-4'>
-                      <h3 className='mb-4 text-lg font-semibold text-gray-900'>Video material</h3>
                       <video
                         src={newsData.video}
                         controls
@@ -89,7 +88,7 @@ const NewsDetail = () => {
 
           <div className='lg:col-span-1'>
             <RelatedPosts currentId={newsData?.id} />
-          </div> 
+          </div>
         </div>
 
         <div className='mt-16 border-t border-gray-200 pt-8'>
@@ -98,7 +97,7 @@ const NewsDetail = () => {
             className='group inline-flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-6 py-3 text-gray-700 shadow-sm transition-all duration-200 hover:border-blue-200 hover:bg-gray-50 hover:text-blue-600 hover:shadow-md'
           >
             <ArrowLeft className='h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1' />
-            <span className='font-medium'>Asosiy sahifaga qaytish</span>
+            <span className='font-medium'>{t('backToHome')}</span>
           </Link>
         </div>
       </div>

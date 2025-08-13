@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface SEOHeadProps {
   title: string;
   description?: string;
@@ -15,7 +17,9 @@ export function SEOHead({
   canonicalUrl,
   robots = "index, follow",
 }: SEOHeadProps) {
-  const siteName = "Yoshlar kundaligi";
+
+  const {t} = useTranslation("common")
+  const siteName = t("youthDiary");
   const fullTitle = `${title} | ${siteName}`;
 
   return (

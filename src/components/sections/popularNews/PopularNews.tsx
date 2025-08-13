@@ -5,10 +5,11 @@ import { FormattedDate } from '../../common/FormattedDate'
 import { OptimizedImage } from '../../ui/optimized-image'
 import PopularNewsSkeleton from './PopularNewsSkeleton'
 import ErrorState from '@/components/common/ErrorState'
+import { useTranslation } from 'react-i18next'
 
 const PopularNews = () => {
   const { data, isLoading, error } = useBreaking()
-
+  const { t } = useTranslation("common")
   if (isLoading) return <PopularNewsSkeleton />
 
   if (error || !data) return <ErrorState />
@@ -17,12 +18,12 @@ const PopularNews = () => {
     <section className='py-8 md:py-20'>
       <div className='container mx-auto px-1'>
         <div className='mb-8 flex items-center justify-between'>
-          <SectionHeader title='Dolzarb yangiliklar' />
+          <SectionHeader title={t("latestNews")} />
           <Link
             to='/all-news'
             className='group flex items-center gap-2 text-gray-600 transition-colors hover:text-blue-600'
           >
-            <span className='text-sm font-medium'>Barcha yangiliklar</span>
+            <span className='text-sm font-medium'>{t("allNews")}</span>
             <svg
               className='h-4 w-4 transition-transform group-hover:translate-x-1'
               fill='none'

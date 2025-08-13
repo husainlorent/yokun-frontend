@@ -2,9 +2,11 @@ import SectionHeader from '@/components/common/SectionHeader'
 import { OptimizedImage } from '@/components/ui/optimized-image'
 import { popularNewsData } from '@/constants/newsData'
 import { MoveRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const AllNews = () => {
+  const {t} = useTranslation("common")
   return (
     <div className='container mx-auto px-4 py-8 min-h-screen'>
       <SectionHeader title='Barcha yangiliklar' className='py-8'/>
@@ -33,7 +35,7 @@ const AllNews = () => {
                 </p>
                 <div className='mt-auto flex items-center justify-between'>
                   <span className='inline-flex items-center font-medium text-blue-600 group-hover:text-blue-800 transition-colors'>
-                    Batafsil
+                    {t("readMore")}
                     <MoveRight className='ml-2 group-hover:translate-x-1 transition-transform' />
                   </span>
                 </div>
