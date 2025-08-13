@@ -18,7 +18,7 @@
   .logo {
     @apply text-midnight font-logo text-3xl font-extrabold transition-colors duration-200 hover:text-black;
   }
-
+ 
   .search {
     @apply max-w-lg min-w-md rounded-full border border-gray-400 px-4 py-1.5 outline-none;
   }
@@ -30,7 +30,6 @@
   .social-item {
     @apply rounded border border-gray-500 p-1.5 text-gray-200 transition-colors duration-200 hover:border-gray-200;
   }
-
 }
 
 @layer utilities {
@@ -38,6 +37,9 @@
     @apply leading-heading-h1 text-4xl font-semibold text-black;
   }
 }
+ .container {
+    @apply  px-4 sm:px-6 lg:px-8;
+  }
 
 body {
   @apply font-poppins;

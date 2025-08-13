@@ -31,6 +31,7 @@ export const useLanguage = () => {
         if (newLang === currentLang) return;
 
         try {
+            queryClient.clear();
             queryClient.invalidateQueries();
             const currentPath = location.pathname;
             let newPath: string;
