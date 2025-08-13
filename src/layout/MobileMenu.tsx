@@ -1,11 +1,11 @@
 import { AlignJustify, X, Search } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import Logo from '@/components/common/Logo'
 import { useCategories } from '@/hook/useCategory'
 import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 import { useLanguage } from '@/hook/useLanguage'
+import { AppLink } from '@/components/common/AppLink'
 
 const MobileMenu = () => {
   const { t } = useTranslation()
@@ -62,14 +62,14 @@ const MobileMenu = () => {
           {categories?.map(category => {
             const linkPath = isKyrillic ? `/kr/posts/${category.id}` : `/posts/${category.id}`
             return (
-              <Link
+              <AppLink
                 key={category.id}
                 to={linkPath}
                 className='block rounded-lg px-3 py-3 text-gray-700 transition-colors hover:bg-gray-100'
                 onClick={toggleMenu}
               >
                 {category.name}
-              </Link>
+              </AppLink>
             )
           })}
         </nav>
