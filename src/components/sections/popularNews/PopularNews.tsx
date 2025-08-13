@@ -20,7 +20,7 @@ const PopularNews = () => {
         <div className='mb-8 flex items-center justify-between'>
           <SectionHeader title={t("latestNews")} />
           <AppLink
-            to='/all-news'
+            to='/news'
             className='group flex items-center gap-2 text-gray-600 transition-colors hover:text-blue-600'
           >
             <span className='text-sm font-medium'>{t("allNews")}</span>

@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from 'react'
 
 const routes = [
   { index: true, element: <Home /> },
-  { path: 'all-news', element: <AllNews /> },
+  { path: 'news', element: <AllNews /> },
   { path: 'news/:newsId', element: <NewsDetail /> },
   { path: 'posts/:categoryId', element: <Posts /> },
   { path: 'post/:postId', element: <PostDetail /> }
@@ -25,7 +25,6 @@ const LanguageWrapper = ({ children }: { children: ReactNode }) => {
     const urlLang = window.location.pathname.startsWith('/kr') ? 'kr' : 'uz'
     const storedLang = localStorage.getItem('language') || 'uz'
     
-    // URL bilan til mos kelmasa, URL'ni prioritet qilamiz
     if (urlLang !== storedLang) {
       console.log('Switching language from URL:', urlLang)
       i18n.changeLanguage(urlLang)
