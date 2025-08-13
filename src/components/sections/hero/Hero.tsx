@@ -2,7 +2,6 @@
 import { useLatestNews } from '@/hook/useNews'
 import FeaturedNews from './featuredNews/FeaturedNews'
 import SecondaryNews from './secondaryNews/SecondaryNews'
-
 const Hero = () => {
 
     const { data: newsData, isLoading, error } = useLatestNews()

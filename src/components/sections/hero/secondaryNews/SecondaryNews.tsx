@@ -2,8 +2,9 @@ import ErrorState from '@/components/common/ErrorState'
 import { FormattedDate } from '@/components/common/FormattedDate'
 import { OptimizedImage } from '@/components/ui/optimized-image'
 import type { INews } from '@/types/news.interface'
-import { Link } from 'react-router-dom'
+
 import SecondaryNewsSkeleton from './SecondaryNewsSkeleton'
+import { AppLink } from '@/components/common/AppLink'
 
 interface SecondaryNewsProps {
     data?: INews[]
@@ -25,7 +26,7 @@ const SecondaryNews: React.FC<SecondaryNewsProps> = ({ data, isLoading, error })
         <div className='h-full'>
             <article className='flex h-full flex-col gap-3 md:gap-4'>
                 {data?.map((item, index) => (
-                    <Link
+                    <AppLink
                         to={`/news/${item.id}`}
                         key={index}
                         className='group border-border-grey relative flex flex-1 cursor-pointer gap-3 border-b pb-3 last:border-b-0 md:pb-4'
@@ -45,7 +46,7 @@ const SecondaryNews: React.FC<SecondaryNewsProps> = ({ data, isLoading, error })
                                 {item.title}
                             </h2>
                         </div>
-                    </Link>
+                    </AppLink>
                 ))}
             </article>
         </div>

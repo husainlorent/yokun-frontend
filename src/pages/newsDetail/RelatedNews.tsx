@@ -1,10 +1,10 @@
 import { Eye } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import { FormattedDate } from '@/components/common/FormattedDate'
 import { OptimizedImage } from '@/components/ui/optimized-image'
 import { useRelated } from '@/hook/useNews'
 import { RelatedSkeleton } from '@/components/common/RelatedSkeleton'
 import { useTranslation } from 'react-i18next'
+import { AppLink } from '@/components/common/AppLink'
 
 interface NewsDetailSidebarProps {
   currentId: string | undefined
@@ -27,7 +27,7 @@ export const RelatedPosts: React.FC<NewsDetailSidebarProps> = ({ currentId }) =>
         <div className='space-y-4'>
           {relatedNews && relatedNews.length > 0 ? (
             relatedNews?.map(item => (
-              <Link key={item.id} to={`/news/${item.id}`} className='group block'>
+              <AppLink key={item.id} to={`/news/${item.id}`} className='group block'>
                 <div className='flex gap-4 rounded-xl py-2 transition-all duration-200 hover:bg-gray-50'>
                   <div className='relative h-16 w-20 shrink-0 overflow-hidden rounded-lg'>
                     {item.image ? (
@@ -47,7 +47,7 @@ export const RelatedPosts: React.FC<NewsDetailSidebarProps> = ({ currentId }) =>
                     </h4>
                   </div>
                 </div>
-              </Link>
+              </AppLink>
             ))
           ) : (
             <div className='py-8 text-center'>

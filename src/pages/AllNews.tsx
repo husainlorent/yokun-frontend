@@ -1,9 +1,9 @@
+import { AppLink } from '@/components/common/AppLink'
 import SectionHeader from '@/components/common/SectionHeader'
 import { OptimizedImage } from '@/components/ui/optimized-image'
 import { popularNewsData } from '@/constants/newsData'
 import { MoveRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 
 const AllNews = () => {
   const {t} = useTranslation("common")
@@ -12,7 +12,7 @@ const AllNews = () => {
       <SectionHeader title='Barcha yangiliklar' className='py-8'/>
       <div className='space-y-6'>
         {popularNewsData.map((item, index) => (
-          <Link
+          <AppLink
             key={index}
             to='/post/1'
             className='border-border-grey flex flex-col overflow-hidden border md:flex-row transition-all duration-200 group'
@@ -41,7 +41,7 @@ const AllNews = () => {
                 </div>
               </div>
             </div>
-          </Link>
+          </AppLink>
         ))}
       </div>
     </div>

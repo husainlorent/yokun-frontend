@@ -1,10 +1,10 @@
 import { Eye } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import { FormattedDate } from '@/components/common/FormattedDate'
 import { OptimizedImage } from '@/components/ui/optimized-image'
 import { usePostByCategory } from '@/hook/usePost'
 import { RelatedSkeleton } from '@/components/common/RelatedSkeleton'
 import { useTranslation } from 'react-i18next'
+import { AppLink } from '@/components/common/AppLink'
 
 interface PostDetailSidebarProps {
   categoryId: string | undefined
@@ -31,7 +31,7 @@ export const RelatedPosts: React.FC<PostDetailSidebarProps> = ({ categoryId, cur
         <div className='space-y-4'>
           {relatedPosts.length > 0 ? (
             relatedPosts.map(item => (
-              <Link key={item.id} to={`/post/${item.id}`} className='group block'>
+              <AppLink key={item.id} to={`/post/${item.id}`} className='group block'>
                 <div className='flex gap-4 rounded-xl py-2 transition-all duration-200 hover:bg-gray-50'>
                   <div className='relative h-16 w-20 shrink-0 overflow-hidden rounded-lg'>
                     {item.image ? (
@@ -51,7 +51,7 @@ export const RelatedPosts: React.FC<PostDetailSidebarProps> = ({ categoryId, cur
                     </h4>
                   </div>
                 </div>
-              </Link>
+              </AppLink>
             ))
           ) : (
             <div className='py-8 text-center'>
