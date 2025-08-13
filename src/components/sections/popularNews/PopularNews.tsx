@@ -1,11 +1,11 @@
 import SectionHeader from '../../common/SectionHeader'
-import { Link } from 'react-router-dom'
 import { useBreaking } from '@/hook/useNews'
 import { FormattedDate } from '../../common/FormattedDate'
 import { OptimizedImage } from '../../ui/optimized-image'
 import PopularNewsSkeleton from './PopularNewsSkeleton'
 import ErrorState from '@/components/common/ErrorState'
 import { useTranslation } from 'react-i18next'
+import { AppLink } from '@/components/common/AppLink'
 
 const PopularNews = () => {
   const { data, isLoading, error } = useBreaking()
@@ -19,7 +19,7 @@ const PopularNews = () => {
       <div className='container mx-auto px-1'>
         <div className='mb-8 flex items-center justify-between'>
           <SectionHeader title={t("latestNews")} />
-          <Link
+          <AppLink
             to='/all-news'
             className='group flex items-center gap-2 text-gray-600 transition-colors hover:text-blue-600'
           >
@@ -37,11 +37,11 @@ const PopularNews = () => {
                 d='M17 8l4 4m0 0l-4 4m4-4H3'
               />
             </svg>
-          </Link>
+          </AppLink>
         </div>
         <div className='grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6'>
           {data?.map((item, index) => (
-            <Link to={`/news/${item.id}`} key={index} className='group cursor-pointer'>
+            <AppLink to={`/news/${item.id}`} key={index} className='group cursor-pointer'>
               <article>
                 <div className='relative mb-4'>
                   {item.image ? (
@@ -60,7 +60,7 @@ const PopularNews = () => {
                   </h4>
                 </div>
               </article>
-            </Link>
+            </AppLink>
           ))}
         </div>
       </div>

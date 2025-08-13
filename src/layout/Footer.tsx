@@ -1,7 +1,8 @@
+import { AppLink } from '@/components/common/AppLink'
 import { socialLinks } from '@/constants/socialLinks'
 import { useCategories } from '@/hook/useCategory'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+
 
 const Footer = () => {
   const { t } = useTranslation('common')
@@ -37,9 +38,9 @@ const Footer = () => {
             <ul className='grid grid-cols-2 gap-x-8 gap-y-4 text-white md:grid-cols-3 lg:grid-cols-4'>
               {categories?.map(links => (
                 <li key={links.name}>
-                  <Link to={`/posts/${links.id}`} key={links.name}>
+                  <AppLink to={`/posts/${links.id}`} key={links.name}>
                     {links.name}
-                  </Link>
+                  </AppLink>
                 </li>
               ))}
             </ul>

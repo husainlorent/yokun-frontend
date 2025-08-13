@@ -2,11 +2,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { usePost } from '@/hook/usePost'
 import { PostDetailHeader } from './PostDetailHeader'
 import { ChevronRight, ArrowLeft } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import { RelatedPosts } from './RelatedPosts'
 import { getYoutubeEmbedUrl } from '@/utils/getYoutubeEmbedUrl'
 import { LoadingDetailState } from '@/components/common/LoadingDetailState'
 import { useTranslation } from 'react-i18next'
+import { AppLink } from '@/components/common/AppLink'
 
 const PostDetail = () => {
   const { postId } = useParams()
@@ -21,9 +21,9 @@ const PostDetail = () => {
     <div className='min-h-screen bg-gradient-to-b from-gray-50 to-white'>
       <div className='container mx-auto py-8'>
         <nav className='mb-8 flex items-center space-x-2 overflow-x-auto text-sm text-gray-600'>
-          <Link to='/' className='font-medium transition-colors duration-200 hover:text-blue-600'>
+          <AppLink to='/' className='font-medium transition-colors duration-200 hover:text-blue-600'>
             {t("home")}
-          </Link>
+          </AppLink>
           <ChevronRight className='h-4 w-4 text-gray-400' />
           <button
             onClick={() => navigate(-1)}
@@ -94,13 +94,13 @@ const PostDetail = () => {
         </div>
 
         <div className='mt-16 border-t border-gray-200 pt-8'>
-          <Link
+          <AppLink
             to='/'
             className='group inline-flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-6 py-3 text-gray-700 shadow-sm transition-all duration-200 hover:border-blue-200 hover:bg-gray-50 hover:text-blue-600 hover:shadow-md'
           >
             <ArrowLeft className='h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1' />
             <span className='font-medium'>{t("backToHome")}</span>
-          </Link>
+          </AppLink>
         </div>
       </div>
     </div>

@@ -2,7 +2,8 @@ import React from 'react';
 import { OptimizedImage } from './optimized-image';
 import type { IPost } from '@/types/post.interface';
 import { FormattedDate } from '../common/FormattedDate';
-import { Link } from 'react-router-dom';
+import { AppLink } from '../common/AppLink';
+
 
 interface PostsCardProps {
   data: IPost;
@@ -12,7 +13,7 @@ interface PostsCardProps {
 const PostsCard: React.FC<PostsCardProps> = ({ data, className = "" }) => {
   return (
     <div className={`flex-shrink-0 px-3 ${className}`}>
-      <Link to={`/post/${data.id}`}>
+      <AppLink to={`/post/${data.id}`}>
         <article className="group cursor-pointer rounded-lg border border-border-grey overflow-hidden">
           <div className="relative overflow-hidden rounded-t-lg">
             {
@@ -33,7 +34,7 @@ const PostsCard: React.FC<PostsCardProps> = ({ data, className = "" }) => {
             </h3>
           </div>
         </article>
-      </Link>
+      </AppLink>
     </div>
   );
 };

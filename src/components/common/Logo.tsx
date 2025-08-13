@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
 import LogoPng from "@/assets/images/logo.png"
+import { AppLink } from './AppLink'
 const Logo = () => {
     return (
         <>
-            <Link to={'/'} className='flex items-center'>
+            <AppLink to={'/'} className='flex items-center'>
                 <img
                     alt='logo'
                     src={LogoPng}
@@ -13,7 +13,7 @@ const Logo = () => {
                     className='h-16 w-20 object-cover'
                 />
                 <h2 className='logo'>Yoshlar kundaligi</h2>
-            </Link>
+            </AppLink>
         </>
     )
 }
