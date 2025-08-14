@@ -40,7 +40,9 @@ const resources = {
                 homeOgTitle: "Yoshlar kundaligi - Bosh sahifa",
                 homeOgDescription: "Yoshlar kundaligida eng so'nggi va qiziqarli yangiliklarni toping.",
                 siteName: "Yoshlar kundaligi"
-            }
+            },
+            noArticles: "Maqolalar topilmadi",
+            noArticlesInCategory: "Bu kategoriyada hozircha maqolalar mavjud emas",
         }
     },
     kr: {
@@ -74,7 +76,9 @@ const resources = {
                 homeOgTitle: "Ёшлар кундалиги - Бош саҳифа",
                 homeOgDescription: "Ёшлар кундалигида энг сўнгги ва қизиқарли янгиликларни топинг.",
                 siteName: "Ёшлар кундалиги"
-            }
+            },
+            noArticles: "Мақолалар топилмади",
+            noArticlesInCategory: "Бу категорияда ҳозирча мақолалар мавжуд эмас",
         }
     }
 };

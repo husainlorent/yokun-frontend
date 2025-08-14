@@ -2,7 +2,7 @@ import { AppLink } from '@/components/common/AppLink'
 import { socialLinks } from '@/constants/socialLinks'
 import { useCategories } from '@/hook/useCategory'
 import { useTranslation } from 'react-i18next'
-
+import aktLogo from '@/assets/images/akt-logo.png'
 
 const Footer = () => {
   const { t } = useTranslation('common')
@@ -45,17 +45,18 @@ const Footer = () => {
               ))}
             </ul>
             <p className='py-4 text-sm text-gray-300'>© 2023-2025 {t('allRightsReserved')}</p>
-            <p className='text-gray-300'>
+            <div className='flex items-center gap-x-1 text-gray-300'>
               {t('developed')}:{' '}
               <a
                 href='https://akt-center.uz'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-lg font-semibold text-blue-100'
+                className='flex items-center text-lg font-semibold text-blue-100'
               >
+                <img src={aktLogo} alt='akt logo' width={40} height={40} className='md:h-10 md:w-10 h-8 w-8' />{' '}
                 AKT center
               </a>
-            </p>
+            </div>
           </div>
         </div>
       </div>
