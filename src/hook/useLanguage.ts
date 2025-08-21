@@ -29,7 +29,6 @@ export const useLanguage = () => {
 
     const switchLanguage = async (newLang: Language) => {
         if (newLang === currentLang) return;
-
         try {
             queryClient.clear();
             queryClient.invalidateQueries();

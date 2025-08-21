@@ -29,7 +29,7 @@ export const useNews = (id?: string) => {
 };
 
 
-export const useAllBews = () => {
+export const useAllNews = () => {
     return useQuery({
         queryKey: NEWS_QUERY_KEYS.list(),
         queryFn: () => newsApi.getAllNews(),

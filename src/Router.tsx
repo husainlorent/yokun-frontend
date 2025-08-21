@@ -9,22 +9,24 @@ import AllNews from './pages/AllNews'
 import NewsDetail from './pages/newsDetail/NewsDetail'
 import { useTranslation } from 'react-i18next'
 import { useEffect, type ReactNode } from 'react'
+import SearchResultPage from './pages/SearchResultPage'
 
 const routes = [
   { index: true, element: <Home /> },
   { path: 'news', element: <AllNews /> },
   { path: 'news/:newsId', element: <NewsDetail /> },
   { path: 'posts/:categoryId', element: <Posts /> },
-  { path: 'post/:postId', element: <PostDetail /> }
+  { path: 'post/:postId', element: <PostDetail /> },
+  { path: 'search', element: <SearchResultPage /> }
 ]
 
 const LanguageWrapper = ({ children }: { children: ReactNode }) => {
   const { i18n } = useTranslation()
-  
+
   useEffect(() => {
     const urlLang = window.location.pathname.startsWith('/kr') ? 'kr' : 'uz'
     const storedLang = localStorage.getItem('language') || 'uz'
-    
+
     if (urlLang !== storedLang) {
       console.log('Switching language from URL:', urlLang)
       i18n.changeLanguage(urlLang)

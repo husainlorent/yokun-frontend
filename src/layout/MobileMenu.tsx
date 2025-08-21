@@ -1,20 +1,26 @@
-import { AlignJustify, X, Search } from 'lucide-react'
+import { AlignJustify, X } from 'lucide-react'
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import Logo from '@/components/common/Logo'
 import { useCategories } from '@/hook/useCategory'
 import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 import { useLanguage } from '@/hook/useLanguage'
 import { AppLink } from '@/components/common/AppLink'
+import Search from '@/components/common/Search'
 
 const MobileMenu = () => {
-  const { t } = useTranslation()
   const { data: categories } = useCategories()
   const { isKyrillic } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
+  }
+  const closeMenu = () => {
+    setIsOpen(false)
+  }
+
+  const handleSearchSubmit = () => {
+    closeMenu()
   }
 
   return (
@@ -44,15 +50,7 @@ const MobileMenu = () => {
 
         <div className='border-border-grey space-y-4 border-b p-4'>
           <div className='relative'>
-            <Search
-              className='absolute top-1/2 left-3 -translate-y-1/2 transform text-gray-300'
-              size={18}
-            />
-            <input
-              type='text'
-              placeholder={t('common.search')}
-              className='w-full rounded-lg border py-2 pr-4 pl-10 focus:border-0 focus:ring-1 focus:ring-blue-500 focus:outline-none'
-            />
+            <Search onSearchSubmit={handleSearchSubmit} />
           </div>
 
           <LanguageSwitcher variant='buttons' />
@@ -60,7 +58,9 @@ const MobileMenu = () => {
 
         <nav className='p-4'>
           {categories?.map(category => {
-            const linkPath = isKyrillic ? `/kr/posts/${category.id}` : `/posts/${category.id}`
+            const linkPath = isKyrillic
+              ? `/kr/posts/${category.id}`
+              : `/posts/${category.id}`
             return (
               <AppLink
                 key={category.id}

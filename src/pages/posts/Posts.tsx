@@ -10,6 +10,7 @@ import EmptyPostState from './EmptyPostState'
 import ErrorState from '@/components/common/ErrorState'
 import PostSkeleton from './PostSkleton'
 import { useTranslation } from 'react-i18next'
+import { SEOHead } from '@/components/common/SEOHead'
 
 const Posts = () => {
   const { categoryId } = useParams()
@@ -17,7 +18,11 @@ const Posts = () => {
   const { t } = useTranslation('common')
   const currentPage = Math.max(1, parseInt(searchParams.get('page') || '', 10) || 1)
 
-  const { data: response, isLoading, error } = usePostByCategory(categoryId || '', currentPage)
+  const {
+    data: response,
+    isLoading,
+    error
+  } = usePostByCategory(categoryId || '', currentPage)
 
   const { posts, pagination } = useMemo(() => {
     if (!response) {
@@ -37,7 +42,8 @@ const Posts = () => {
   if (isLoading) {
     return (
       <div className='container mx-auto min-h-screen px-4 py-8'>
-        <SectionHeader title={t("articles")} className='py-8' />
+        <SEOHead title={t('articles')} />
+        <SectionHeader title={t('articles')} className='py-8' />
         <div className='space-y-6'>
           {Array.from({ length: 5 }).map((_, index) => (
             <PostSkeleton key={index} />
@@ -50,7 +56,8 @@ const Posts = () => {
   if (error) {
     return (
       <div className='container mx-auto min-h-screen px-4 py-8'>
-        <SectionHeader title={t("articles")} className='py-8' />
+        <SEOHead title={t('articles')} />
+        <SectionHeader title={t('articles')} className='py-8' />
         <ErrorState />
       </div>
     )
@@ -59,7 +66,8 @@ const Posts = () => {
   if (posts.length === 0) {
     return (
       <div className='container mx-auto min-h-screen px-4 py-8'>
-        <SectionHeader title={t("articles")} className='py-8' />
+        <SEOHead title={t('articles')} />
+        <SectionHeader title={t('articles')} className='py-8' />
         <EmptyPostState />
       </div>
     )
@@ -67,11 +75,12 @@ const Posts = () => {
 
   return (
     <div className='container mx-auto min-h-screen px-4 py-8'>
+      <SEOHead title={t('articles')} />
       <div className='mb-8 flex items-center justify-between'>
-        <SectionHeader title={t("articles")} className='py-0' />
-        {pagination && (
+        <SectionHeader title={t('articles')} className='py-0' />
+        {/* {pagination && (
           <div className='text-sm text-gray-600'>{pagination.totalItems} {t("foodArticle")}</div>
-        )}
+        )} */}
       </div>
 
       <div className='space-y-6'>
@@ -93,7 +102,10 @@ const Posts = () => {
             </div>
             <div className='flex-1 p-6'>
               <div className='flex h-full flex-col'>
-                <FormattedDate date={post.createdAt} className='mb-2 text-xs text-gray-500' />
+                <FormattedDate
+                  date={post.createdAt}
+                  className='mb-2 text-xs text-gray-500'
+                />
                 <h2 className='mb-3 line-clamp-2 text-xl leading-tight font-bold text-gray-900 transition-colors group-hover:text-blue-600 md:text-2xl'>
                   {post.title}
                 </h2>

@@ -13,7 +13,6 @@ export const newsApi = {
 
     getAllNews: async (params?: {
         page?: number;
-        limit?: number;
         category?: string;
     }): Promise<NewsResponse> => {
         const { data } = await api.get('/news', { params });

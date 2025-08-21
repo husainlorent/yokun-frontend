@@ -43,7 +43,17 @@ const resources = {
             },
             noArticles: "Maqolalar topilmadi",
             noArticlesInCategory: "Bu kategoriyada hozircha maqolalar mavjud emas",
-        }
+            searchResults: "Qidiruv natijalari",
+            searchError: "Qidirishda xatolik",
+            tryAgainLater: "Keyinroq qaytadan urinib ko'ring",
+            enterSearchQuery: "Qidiruv so'zini kiriting",
+            searchHint: "Maqola yoki yangilik qidirish uchun yuqorida so'z yozing",
+            noResultsFound: "Hech narsa topilmadi",
+            tryDifferentKeywords: "Boshqa kalit so'zlarni sinab ko'ring",
+            searchResultsFor: "uchun qidiruv natijalari",
+            resultsFound: "ta natija topildi"
+        },
+
     },
     kr: {
         common: {
@@ -79,6 +89,15 @@ const resources = {
             },
             noArticles: "Мақолалар топилмади",
             noArticlesInCategory: "Бу категорияда ҳозирча мақолалар мавжуд эмас",
+            searchResults: "Қидирув натижалари",
+            searchError: "Қидиришда хатолик",
+            tryAgainLater: "Кейинроқ қайтадан уриниб кўринг",
+            enterSearchQuery: "Қидирув сўзини киритинг",
+            searchHint: "Мақола ёки янгилик қидириш учун юқорида сўз ёзинг",
+            noResultsFound: "Ҳеч нарса топилмади",
+            tryDifferentKeywords: "Бошқа калит сўзларни синаб кўринг",
+            searchResultsFor: "учун қидирув натижалари",
+            resultsFound: "та натижа топилди"
         }
     }
 };
