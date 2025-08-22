@@ -8,7 +8,7 @@ interface SearchProps {
 }
 
 const Search = ({ onSearchSubmit }: SearchProps) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('common')
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
 
@@ -17,6 +17,7 @@ const Search = ({ onSearchSubmit }: SearchProps) => {
     if (query.trim()) {
       navigate(`/search?q=${encodeURIComponent(query.trim())}`)
       onSearchSubmit?.()
+      setQuery("")
     }
   }
 
